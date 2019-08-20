@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.light.blog.dao.mapper.MsgCommentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.light.blog.dao.entities.MsgComment">
+        <id column="id" property="id"/>
+        <result column="nickname" property="nickname"/>
+        <result column="article_key" property="articleKey"/>
+        <result column="post_date" property="postDate"/>
+        <result column="content" property="content"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="email" property="email"/>
+        <result column="ref_id" property="refId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, nickname, article_key, post_date, content, is_deleted, email,ref_id
+    </sql>
+
+    <select id="queryByArticle" resultMap="BaseResultMap" resultType="list">
+        select
+        <include refid="Base_Column_List"/>
+        from msg_comment where article_key=#{articleKey} limit #{offset},#{size};
+    </select>
+
+    <!--<select id="countByArticle" resultType="int">-->
+        <!--select count(1) from msg_comment where article_key=#{articleKey}-->
+    <!--</select>-->
+
+</mapper>

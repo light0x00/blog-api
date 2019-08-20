@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
+
+mybatis-plus:
+  typeEnumsPackage: com.light.blog.dao.entities
+  mapperLocations: mapper/*.xml
+  #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+  field-strategy: 0
+
+
+

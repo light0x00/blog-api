@@ -1,0 +1,20 @@
+# 热重启开关
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog?useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+    username: blog
+    password: 1234
+
+app:
+  url: http://gc.light0x00.com
+  context-path: ${server.servlet.context-path}
+  upload-path: /home/apps/gc-shop-data
+  cookie:
+    domain: light0x00.com
+    path: /
+    max-age: 1800
+    token-key: token
+  allow-origins:
+    - blog.light0x00.com
+
