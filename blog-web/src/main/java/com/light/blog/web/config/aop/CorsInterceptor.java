@@ -33,11 +33,7 @@ public class CorsInterceptor extends HandlerInterceptorAdapter {
     private void cors(HttpServletRequest request, HttpServletResponse response) throws InterruptedException {
 
         String targetOrigin = request.getHeader("Origin");
-        //同域没有Origin字段 这里为了兼容内网穿透
-        if(targetOrigin==null){
-            targetOrigin = request.getHeader("host");
-        }
-
+//
         if (!appConfig.isAllowOrigin(targetOrigin)) {
             log.info("The {} Origin is not allowed", targetOrigin);
             return;

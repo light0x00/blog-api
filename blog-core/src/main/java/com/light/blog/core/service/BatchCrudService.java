@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.light.blog.dao.MyBaseMapper;
 import com.light.blog.common.utils.ReflectUtils;
 import com.light.blog.common.vo.OutputModel;
-import com.light.blog.common.vo.PageVo;
+import com.light.blog.common.vo.PageInfo;
 import com.light.blog.common.vo.PagingOutputModel;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -43,7 +43,7 @@ public class BatchCrudService<M extends MyBaseMapper<E>, E> extends ServiceImpl<
         return e != null ? OutputModel.ofSuccess(e) : OutputModel.ofWarn();
     }
 
-    public PagingOutputModel<E> baseQuery(PageVo page) {
+    public PagingOutputModel<E> baseQuery(PageInfo page) {
         IPage<E> r = mapper.selectPage(page, null);
         return PagingOutputModel.ofSuccess(r);
     }

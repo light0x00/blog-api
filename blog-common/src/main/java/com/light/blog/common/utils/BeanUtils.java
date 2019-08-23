@@ -74,7 +74,7 @@ public class BeanUtils {
      * @param <I>
      * @return
      */
-    public static <C extends Collection<I>, I> C copyAs(Collection source, C dest,Class<I> destItemClass) {
+    public static <C extends Collection<I>, I> C copyAsCollection(Collection source, C dest,Class<I> destItemClass) {
 
         if (source == null) {
             return null;
@@ -88,7 +88,7 @@ public class BeanUtils {
 
 
     public static <T> ArrayList<T> copyAsArrayList(Collection origin, Class<T> itemClass) {
-        return copyAs(origin,new ArrayList<>(origin.size()), itemClass);
+        return copyAsCollection(origin,new ArrayList<>(origin.size()), itemClass);
     }
 
 }

@@ -5,6 +5,7 @@ import com.light.blog.common.vo.PagingOutputModel;
 import com.light.blog.core.service.msg.MsgCommentService;
 import com.light.blog.core.service.msg.MsgCommentVo;
 import com.light.blog.dao.vo.QueryMsgCommentVo;
+import com.light.blog.dao.vo.QueryRepliesVo;
 import com.light.blog.web.config.toolkit.GuestApi;
 import com.light.blog.web.controller.common.BaseController;
 import org.springframework.web.bind.annotation.*;
@@ -27,9 +28,14 @@ public class MsgCommentController extends BaseController<MsgCommentService> {
         return service.add(in);
     }
 
-    @GetMapping("/query")
-    public PagingOutputModel<MsgCommentVo> query(@ModelAttribute QueryMsgCommentVo in){
-        return service.query(in);
+    @PostMapping("/query")
+    public PagingOutputModel<MsgCommentVo> query(@RequestBody QueryMsgCommentVo in){
+        return service.queryRoot(in);
+    }
+
+    @PostMapping("/queryReplies")
+    public PagingOutputModel<MsgCommentVo> queryReplies(@RequestBody QueryRepliesVo in){
+        return service.queryReplies(in);
     }
 
 }

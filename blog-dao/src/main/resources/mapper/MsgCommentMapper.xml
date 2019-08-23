@@ -16,17 +16,24 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, nickname, article_key, post_date, content, is_deleted, email,ref_id
+        id, nickname, article_key, post_date, content, is_deleted, email,ref_id,website,upvote,downvote,user_agent,root_id
     </sql>
 
-    <select id="queryByArticle" resultMap="BaseResultMap" resultType="list">
+    <select id="queryRoots" resultMap="BaseResultMap" resultType="list">
         select
         <include refid="Base_Column_List"/>
-        from msg_comment where article_key=#{articleKey} limit #{offset},#{size};
+        from msg_comment where article_key=#{articleKey} and ref_id=-1
+        limit #{offset},#{size};
     </select>
 
-    <!--<select id="countByArticle" resultType="int">-->
-        <!--select count(1) from msg_comment where article_key=#{articleKey}-->
-    <!--</select>-->
+    <select id="queryReplies" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from msg_comment where root_id=#{rootId}
+        limit #{offset},#{size}
+    </select>
+
+
+
 
 </mapper>

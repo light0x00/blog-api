@@ -40,12 +40,16 @@ public class MsgComment implements Serializable {
 
     private String email;
 /*等需要专门的用户中心时再实现*/
-//    private Integer upvote;
-//
-//    private Integer downvote;
+    private Integer upvote;
+
+    private Integer downvote;
 
     private String userAgent;
 
     private Long refId;
+
+    private String website;
+
+    private Long rootId;
 
 }

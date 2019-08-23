@@ -66,6 +66,14 @@ public class CheckUtils {
         return !Arrays.stream(numbers).anyMatch(i->!gtZero(i));
     }
 
+    public static boolean allEq(Number[]numbers,Number value){
+        return !Arrays.stream(numbers).anyMatch(i->!i.equals(value));
+    }
+
+    public static boolean anyEq(Number[]numbers,Number value){
+        return Arrays.stream(numbers).anyMatch(i->i.equals(value));
+    }
+
     public static boolean allGteZero(Number...numbers){
         return !Arrays.stream(numbers).anyMatch(i->!gteZero(i));
     }
@@ -78,6 +86,22 @@ public class CheckUtils {
      */
     public static boolean anyLtZeroOrNil(Number...numbers){
         return Arrays.stream(numbers).anyMatch(CheckUtils::lteZeroOrNil);
+    }
+
+    public static boolean isNil(Number number){
+        return number==null;
+    }
+
+    public static boolean allNil(Number...numbers){
+        return !Arrays.stream(numbers).anyMatch(i->!isNil(i));
+    }
+
+    public static boolean anyNil(Number...numbers){
+        return Arrays.stream(numbers).anyMatch(i->isNil(i));
+    }
+
+    public static boolean allNotNil(Number...numbers){
+        return !anyNil(numbers);
     }
 
     public static boolean anyGtZero(Number...numbers){

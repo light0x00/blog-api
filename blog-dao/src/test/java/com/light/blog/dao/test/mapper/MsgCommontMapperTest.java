@@ -12,6 +12,7 @@ package com.light.blog.dao.test.mapper;
 import com.light.blog.dao.entities.MsgComment;
 import com.light.blog.dao.mapper.MsgCommentMapper;
 import com.light.blog.dao.test.DaoTestApplication;
+import com.light.blog.dao.vo.QueryRepliesVo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = DaoTestApplication.class)
@@ -48,8 +50,18 @@ public class MsgCommontMapperTest {
     }
 
     @Test
-    public void t2(){
-//        List lst = commentMapper.selectByXml("foo");
+    public void t2() {
+        QueryRepliesVo q = new QueryRepliesVo();
+        q.setRootId(1L);
+        List lst = commentMapper.queryReplies(q);
 //        System.out.println(lst);
     }
+
+
+    @Test
+    public void test3() {
+        List<MsgComment> lst = commentMapper.selectList(null);
+        Map<Long, List<MsgComment>> m = lst.stream().filter(i -> i.getRefId() != null).collect(Collectors.groupingBy(MsgComment::getRefId));
+    }
+
 }

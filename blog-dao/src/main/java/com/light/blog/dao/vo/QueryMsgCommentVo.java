@@ -1,5 +1,6 @@
 package com.light.blog.dao.vo;
 
+import com.light.blog.common.vo.PageInfo;
 import com.light.blog.common.vo.QueryVo;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -18,6 +19,10 @@ public class QueryMsgCommentVo extends QueryVo {
 
     String articleKey;
 
-    int refDepth = 5;
+    PageInfo repliesPageInfo;
+
+
+    boolean lastPage;
+
 
 }

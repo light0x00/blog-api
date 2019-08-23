@@ -36,7 +36,7 @@ public class MsgCommentControllerTest {
         MvcResult mvcResult = this.mockMvc
                 .perform(
                         MockMvcRequestBuilders
-                                .get("/mc/query")
+                                .get("/mc/queryRoots")
                                 .param("articleKey", "foo")
                                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())

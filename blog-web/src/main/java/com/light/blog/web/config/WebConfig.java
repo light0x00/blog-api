@@ -2,10 +2,7 @@ package com.light.blog.web.config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.light.blog.web.config.aop.AuthInterceptor;
-import com.light.blog.web.config.aop.CorsInterceptor;
-import com.light.blog.web.config.aop.DateFormatter;
-import com.light.blog.web.config.aop.UserPrincipalInjector;
+import com.light.blog.web.config.aop.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
@@ -56,13 +53,6 @@ public class WebConfig extends WebMvcConfigurationSupport {
     }
 
 
-    /*
-        请求静态资源映射
-        # path
-        # spring.mvc.static-path-pattern=/static/**，
-        # directory
-        # spring.resources.static-locations=classpath:/static
-     */
 
     /**
      * 请求静态资源映射
@@ -105,6 +95,7 @@ public class WebConfig extends WebMvcConfigurationSupport {
     protected void addFormatters(FormatterRegistry registry) {
 //        registry.addConverter(new MyConverter());
         registry.addFormatter(new DateFormatter());
+        registry.addFormatter(new LocalDateTimeFormatter());
     }
 
     @Autowired

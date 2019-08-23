@@ -1,6 +1,7 @@
 package com.light.blog.core.test.service;
 
 import com.light.blog.common.utils.JsonUtils;
+import com.light.blog.common.vo.PageInfo;
 import com.light.blog.core.service.msg.MsgCommentService;
 import com.light.blog.core.service.msg.MsgCommentVo;
 import com.light.blog.core.test.CoreTestApplication;
@@ -33,10 +34,10 @@ public class MsgCommentServiceTest {
     @Test
     public void query() {
 
-        QueryMsgCommentVo q = new QueryMsgCommentVo().setArticleKey("foo").setRefDepth(2);
-        q.setSize(1).setIndex(5);
-
-        Object obj = commentService.query(q);
+        QueryMsgCommentVo q = new QueryMsgCommentVo().setArticleKey("foo");
+//        q.setSize(1).setIndex(5);
+        q.setRepliesPageInfo(new PageInfo());
+        Object obj = commentService.queryRoot(q);
         System.out.println(JsonUtils.toJsonString(obj));
     }
 

@@ -11,7 +11,7 @@ import lombok.Getter;
  * @since: 2018/10/6 12:11
  */
 @Getter
-public class PageVo {
+public class PageInfo {
 
     protected long index;
 
@@ -20,23 +20,23 @@ public class PageVo {
     protected long total;
 
 
-    public PageVo() {
+    public PageInfo() {
         this.size = 10;
         this.index = 1;
     }
 
-    public PageVo(long index, long size) {
+    public PageInfo(long index, long size) {
         this.index = index;
         this.size = size;
     }
 
-    public PageVo(IPage page){
+    public PageInfo(IPage page){
         this.index = page.getCurrent();
         this.size = page.getSize();
         this.total = page.getTotal();
     }
 
-    public PageVo(long index, long size, long total) {
+    public PageInfo(long index, long size, long total) {
         this.index = index;
         this.size = size;
         this.total = total;

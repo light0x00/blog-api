@@ -17,5 +17,6 @@ app:
     token-key: token
   allow-origins:
     - http://blog-dev.light0x00.com:4092
+    - http://blog-dev.light0x00.com:8082
 
 

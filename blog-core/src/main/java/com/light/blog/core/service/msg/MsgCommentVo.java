@@ -2,6 +2,8 @@ package com.light.blog.core.service.msg;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.light.blog.common.vo.PageInfo;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -42,8 +44,20 @@ public class MsgCommentVo implements Serializable {
 
     private Long refId;
 
+    @ApiModelProperty(hidden = true)
+    private Long rootId;
+
     private String userAgent;
+
+    private String website;
+
+    private Integer upvote;
+
+    private Integer downvote;
 
     private MsgCommentVo ref;
 
+    private List<MsgCommentVo> replies;
+
+    private PageInfo repliesPageInfo;
 }

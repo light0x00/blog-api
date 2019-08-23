@@ -46,7 +46,7 @@
             <groupId>io.swagger</groupId>
             <artifactId>swagger-annotations</artifactId>
             <version>1.5.18</version>
-            <optional>true</optional>
+            <!--<optional>true</optional>-->
         </dependency>
 
     </dependencies>
