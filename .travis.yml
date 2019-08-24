@@ -20,6 +20,7 @@ before_install:
   - git submodule update --init --recursive --remote
   - openssl enc -aes-256-cbc -in deploy/id_rsa_light.enc -out id_rsa_light -K $aes_key -iv $aes_iv -d
   - chmod u=r,og-rwx id_rsa_light
+  - ssh light@47.244.152.125 'echo `date` >> test.txt'
 
 install: mvn clean install -U -P pro -V -Dmaven.javadoc.skip=true -DskipTests=true --quiet
 
