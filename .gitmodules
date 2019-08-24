@@ -1,0 +1,3 @@
+[submodule "deploy/ci-shell"]
+	path = deploy/ci-shell
+	url = https://github.com/light0x00/ci-shell.git

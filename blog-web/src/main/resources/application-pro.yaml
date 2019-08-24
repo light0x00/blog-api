@@ -7,9 +7,8 @@ spring:
     password: 1234
 
 app:
-  url: http://gc.light0x00.com
+  url: http://blog-api.light0x00.com
   context-path: ${server.servlet.context-path}
-  upload-path: /home/apps/gc-shop-data
   cookie:
     domain: light0x00.com
     path: /

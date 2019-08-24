@@ -34,8 +34,11 @@ public class CorsInterceptor extends HandlerInterceptorAdapter {
 
         String targetOrigin = request.getHeader("Origin");
 //
-        if (!appConfig.isAllowOrigin(targetOrigin)) {
-            log.info("The {} Origin is not allowed", targetOrigin);
+//        if(targetOrigin==null){
+//            targetOrigin = request.getHeader("host");
+//        }
+        if (appConfig.isProduction()&&!appConfig.isAllowOrigin(targetOrigin)) {
+            log.debug("The {} Origin is not allowed", targetOrigin);
             return;
         }
         response.setHeader("Access-Control-Allow-Origin", targetOrigin);

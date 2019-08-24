@@ -65,17 +65,15 @@ public class WebConfig extends WebMvcConfigurationSupport {
      */
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+//        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
 //        registry.addResourceHandler("/static/**").addResourceLocations("file:/Users/light/IdeaProjects/personal-projects/gc-shop/src/main/resources/static/"); //这样可以防止资源被缓存,每次都会读硬盘里最新的文件
 //        registry.addResourceHandler("/files/**").addResourceLocations("file:" + environment.getProperty("app.upload-path")); //这样可以防止资源被缓存,每次都会读硬盘里最新的文件
-        registry.addResourceHandler("/files/**").addResourceLocations("file:" + appConfig.getUploadPath()); //这样可以防止资源被缓存,每次都会读硬盘里最新的文件
+//        registry.addResourceHandler("/files/**").addResourceLocations("file:" + appConfig.getUploadPath()); //这样可以防止资源被缓存,每次都会读硬盘里最新的文件
 //        registry.addResourceHandler("/favicon.ico").addResourceLocations("classpath:/static/img/");
 
         //映射swagger-ui
         registry.addResourceHandler("/swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
-        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
-        registry.addResourceHandler("/images/**").addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/images/");
-
+        registry.addResourceHandler("/webjars/springfox-swagger-ui/**").addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/");
         super.addResourceHandlers(registry);
     }
 

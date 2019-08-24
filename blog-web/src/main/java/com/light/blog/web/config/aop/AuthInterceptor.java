@@ -48,7 +48,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.trace(request.getRequestURI() + "=>" + handler.getClass());
 
-        Thread.sleep(1000); //!for test
+//        Thread.sleep(1000); //!for test
 
         //1. 静态资源
         if (handler instanceof ResourceHttpRequestHandler) {
