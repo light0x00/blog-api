@@ -1,6 +1,6 @@
 os: linux
-language: node_js
-node_js:
+language: java
+jdk:
   - 8
 env:
   global:
@@ -13,13 +13,13 @@ git:
   submodules: false
 before_install:
   - git submodule update --init --recursive --remote
-  - openssl enc -aes-256-cbc -in deploy/cert/id_rsa_light.enc -out id_rsa_light -K $aes_key -iv $aes_iv -d
+  - openssl enc -aes-256-cbc -in deploy/id_rsa_light.enc -out id_rsa_light -K $aes_key -iv $aes_iv -d
   - chmod u=r,og-rwx id_rsa_light
-install: npm install && npm run prod
+install: mvn clean install -U -DskipTests=true -P pro
 deploy:
   provider: script
   skip_cleanup: true
-  script: bash deploy/deploy-travis.sh
+  script: bash deploy/travis.sh
   on:
     branch: master
 notifications:
@@ -28,4 +28,3 @@ notifications:
       - light0x00@163.com
     on_success: change
     on_failure: always
-              
