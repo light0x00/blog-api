@@ -1,3 +1,5 @@
+#!/bin/bash
+
 base_path=$TRAVIS_BUILD_DIR
 
 $base_path/deploy/ci-shell/src/index.sh \
@@ -9,7 +11,7 @@ $base_path/deploy/ci-shell/src/index.sh \
 --compile-output-path=blog-web/target/ \
 --remote-ip=47.244.152.125 \
 --remote-user=light \
---remote-path=/home/light/app/blog \
+--remote-path=/home/light/app/blog-api \
 --ssh-key=$base_path/id_rsa_light \
 -y \
 --after-deploy=$base_path/deploy/deploy-screen.sh

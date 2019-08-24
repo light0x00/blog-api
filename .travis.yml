@@ -1,30 +1,37 @@
 os: linux
 language: java
 jdk:
-- openjdk8
-#env:
-#  global:
-#    - secure: "G3j2K9gDH1kLbJXevCCHCASyAblGR/+GYMO3QzJUCUL/jpmFstchZT0fexfaDfYj8kKcWusX5ohvf6vP+7pFFVZANTz3fIQaRNmtzZwOV7pFW9Ks0n5ONNgPKsFEDl+sGzIbf2IG/7xWMCnSFH0Nomip49b0kcOzKVanVLuzz+kfpGvMDL0scYt4KKihDzPFdXMb9u5fFbuGObKatpFgwtT2ULXghWhoGEyWOvRXksD9Pd4V1jOKSAvvsRz3kY9DZ05AvD+xlgTkmPuZnHIzrP3W548HEFu0VsYPw2g7zr739fGsH6ur9fspMGQsTmRrhwInEu9fvGwZ+toT0E3XLSGq2HOyxv50H2kOCVtnsJMVWS8LgYnUXzw/w7Cj/stnn9IssFJas6O6jDdWxRg2yy77Nx3WxJIpoI7WVaen2QkdJTDJkOqrY/3JTsT+pGroZpXcCPTErLE1cIGl//5UGKJhWaOvAC8icbziiHujtdoU7lbanQtzJ1hklFixVuSVYOBAUpEHYT5SXMSmuBxN45CFuFPVWeMclR46salK4qCEXEy4PGcEp9lskbge/Sqm6Eq+tfGAYTxil1hLMo3FisS4b/LZg8WIneWp0yIJ5LnCCjHzkrxCW8njTp7tSybUDOwiqU4nhG8azEy4sZe4OrGlmdzRFdng+TF+cfCLpGM="
-#    - secure: "5C0AAURwqa4uazfWMTk4u3+vEZI9sD09DVAwCnlf3k5MvVfyMtCH34HtVCUkZxM1BX8qXzbHITD82RCMbbnVYZ8AQLese7y629kuoiQYGrjJs078B2fRms6HyB+zNK3th07730/MrCoiyYM6kUeqlmj65LsjezKKzYtCxYRYKSNNHODzo33dQbdXdUA9Zi9C7USrj1XRXgbc3EpYJFq/Oh2MMXCjMsIekSRihbdRhRsxGvyqifOjQw9G23ES0WECugr1KlEfXDGRikUEBE6IP5UHupCQIQSH6F4rVp5qRH2Sx8+swsBZ4G2SVy6L3d0DeuCv5xg8J/GyCQCUis/MzbThoONk55hDAsJ+0UVNBtMcLaCLyHSuPK2hTT/qf//dttXZgadqojk0+uCF4puES/XKl/e8+sngCc7kYeaG47bShACqE2Zntw9BjLbAhMHytsecBUujM76NGqx57Lp3dJCnC1rFU2FviE8v5XwmisiyLO0OrV8tp7lVsEIRF3bINwJS3T0/5eA9Ms9lazANPp6Wm7GEUIbdpvaEMkJa449qhHjRokFr/pBVe0xkpindZSK1oTka4CKS+tk5GCoH+K+Iipd3uP3Yc3hZvx/jKLUAvwO/bAYma77WZwbdKpPEL1nDYTTnIqKH8vANLcD6ZanQcT+t35QqkOmDIs+408I="
-#addons:
-#  ssh_known_hosts:
-#  - 47.244.152.125
-#git:
-#  submodules: false
-#before_install:
-#  - git submodule update --init --recursive --remote
-#  - openssl enc -aes-256-cbc -in deploy/id_rsa_light.enc -out id_rsa_light -K $aes_key -iv $aes_iv -d
-#  - chmod u=r,og-rwx id_rsa_light
+- oraclejdk8
+
+env:
+  global:
+    - secure: "G3j2K9gDH1kLbJXevCCHCASyAblGR/+GYMO3QzJUCUL/jpmFstchZT0fexfaDfYj8kKcWusX5ohvf6vP+7pFFVZANTz3fIQaRNmtzZwOV7pFW9Ks0n5ONNgPKsFEDl+sGzIbf2IG/7xWMCnSFH0Nomip49b0kcOzKVanVLuzz+kfpGvMDL0scYt4KKihDzPFdXMb9u5fFbuGObKatpFgwtT2ULXghWhoGEyWOvRXksD9Pd4V1jOKSAvvsRz3kY9DZ05AvD+xlgTkmPuZnHIzrP3W548HEFu0VsYPw2g7zr739fGsH6ur9fspMGQsTmRrhwInEu9fvGwZ+toT0E3XLSGq2HOyxv50H2kOCVtnsJMVWS8LgYnUXzw/w7Cj/stnn9IssFJas6O6jDdWxRg2yy77Nx3WxJIpoI7WVaen2QkdJTDJkOqrY/3JTsT+pGroZpXcCPTErLE1cIGl//5UGKJhWaOvAC8icbziiHujtdoU7lbanQtzJ1hklFixVuSVYOBAUpEHYT5SXMSmuBxN45CFuFPVWeMclR46salK4qCEXEy4PGcEp9lskbge/Sqm6Eq+tfGAYTxil1hLMo3FisS4b/LZg8WIneWp0yIJ5LnCCjHzkrxCW8njTp7tSybUDOwiqU4nhG8azEy4sZe4OrGlmdzRFdng+TF+cfCLpGM="
+    - secure: "5C0AAURwqa4uazfWMTk4u3+vEZI9sD09DVAwCnlf3k5MvVfyMtCH34HtVCUkZxM1BX8qXzbHITD82RCMbbnVYZ8AQLese7y629kuoiQYGrjJs078B2fRms6HyB+zNK3th07730/MrCoiyYM6kUeqlmj65LsjezKKzYtCxYRYKSNNHODzo33dQbdXdUA9Zi9C7USrj1XRXgbc3EpYJFq/Oh2MMXCjMsIekSRihbdRhRsxGvyqifOjQw9G23ES0WECugr1KlEfXDGRikUEBE6IP5UHupCQIQSH6F4rVp5qRH2Sx8+swsBZ4G2SVy6L3d0DeuCv5xg8J/GyCQCUis/MzbThoONk55hDAsJ+0UVNBtMcLaCLyHSuPK2hTT/qf//dttXZgadqojk0+uCF4puES/XKl/e8+sngCc7kYeaG47bShACqE2Zntw9BjLbAhMHytsecBUujM76NGqx57Lp3dJCnC1rFU2FviE8v5XwmisiyLO0OrV8tp7lVsEIRF3bINwJS3T0/5eA9Ms9lazANPp6Wm7GEUIbdpvaEMkJa449qhHjRokFr/pBVe0xkpindZSK1oTka4CKS+tk5GCoH+K+Iipd3uP3Yc3hZvx/jKLUAvwO/bAYma77WZwbdKpPEL1nDYTTnIqKH8vANLcD6ZanQcT+t35QqkOmDIs+408I="
+
+addons:
+  ssh_known_hosts:
+  - 47.244.152.125
+
+git:
+  submodules: false
+
+before_install:
+  - git submodule update --init --recursive --remote
+  - openssl enc -aes-256-cbc -in deploy/id_rsa_light.enc -out id_rsa_light -K $aes_key -iv $aes_iv -d
+  - chmod u=r,og-rwx id_rsa_light
+
 install: mvn clean install -U -P pro -V -Dmaven.javadoc.skip=true -DskipTests=true
-#deploy:
-#  provider: script
-#  skip_cleanup: true
-#  script: bash deploy/travis.sh
-#  on:
-#    branch: master
-#notifications:
-#  email:
-#    recipients:
-#      - light0x00@163.com
-#    on_success: change
-#    on_failure: always
+
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: bash deploy/travis.sh
+  on:
+    branch: master
+
+notifications:
+  email:
+    recipients:
+      - light0x00@163.com
+    on_success: change
+    on_failure: always
