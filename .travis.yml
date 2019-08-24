@@ -1,7 +1,7 @@
 os: linux
 language: java
 jdk:
-  - 8
+  - oraclejdk8
 env:
   global:
     - secure: "G3j2K9gDH1kLbJXevCCHCASyAblGR/+GYMO3QzJUCUL/jpmFstchZT0fexfaDfYj8kKcWusX5ohvf6vP+7pFFVZANTz3fIQaRNmtzZwOV7pFW9Ks0n5ONNgPKsFEDl+sGzIbf2IG/7xWMCnSFH0Nomip49b0kcOzKVanVLuzz+kfpGvMDL0scYt4KKihDzPFdXMb9u5fFbuGObKatpFgwtT2ULXghWhoGEyWOvRXksD9Pd4V1jOKSAvvsRz3kY9DZ05AvD+xlgTkmPuZnHIzrP3W548HEFu0VsYPw2g7zr739fGsH6ur9fspMGQsTmRrhwInEu9fvGwZ+toT0E3XLSGq2HOyxv50H2kOCVtnsJMVWS8LgYnUXzw/w7Cj/stnn9IssFJas6O6jDdWxRg2yy77Nx3WxJIpoI7WVaen2QkdJTDJkOqrY/3JTsT+pGroZpXcCPTErLE1cIGl//5UGKJhWaOvAC8icbziiHujtdoU7lbanQtzJ1hklFixVuSVYOBAUpEHYT5SXMSmuBxN45CFuFPVWeMclR46salK4qCEXEy4PGcEp9lskbge/Sqm6Eq+tfGAYTxil1hLMo3FisS4b/LZg8WIneWp0yIJ5LnCCjHzkrxCW8njTp7tSybUDOwiqU4nhG8azEy4sZe4OrGlmdzRFdng+TF+cfCLpGM="
@@ -15,7 +15,7 @@ before_install:
   - git submodule update --init --recursive --remote
   - openssl enc -aes-256-cbc -in deploy/id_rsa_light.enc -out id_rsa_light -K $aes_key -iv $aes_iv -d
   - chmod u=r,og-rwx id_rsa_light
-install: mvn clean install -U -DskipTests=true -P pro
+install: mvn clean install -U -P pro -V -Dmaven.javadoc.skip=true -DskipTests=true
 deploy:
   provider: script
   skip_cleanup: true
