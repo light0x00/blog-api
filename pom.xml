@@ -115,4 +115,12 @@
     </dependencies>
 
 
+    <distributionManagement>
+        <repository>
+            <id>aliyun</id>
+            <url>https://maven.aliyun.com/repository/central</url>
+        </repository>
+    </distributionManagement>
+
+
 </project>
