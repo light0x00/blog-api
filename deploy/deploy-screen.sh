@@ -1,8 +1,14 @@
 #!/bin/bash
-echo "after deploy!!!!"
 
 jar_name='blog-api.jar'
-ls $deployPath/$jar_name
+ls $deploy_path/$jar_name
 
-#screen -S $appName -X quit
-#screen -S $appName java -jar $deployPath/$jar_name
+jar_path=$deploy_path/$jar_name
+
+if ! [ -r $jar_path ] ;then
+    echo 'jar包不存在或没有权限:$jar_path'
+    exit 1;
+fi
+
+screen -S $app_name -X quit
+screen -S $app_name java -jar $deployPath/$jar_name
