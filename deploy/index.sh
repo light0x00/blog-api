@@ -22,7 +22,7 @@ to_user=light
 # 私钥路径
 to_key="$app_base_path/id_rsa_light"
 # 部署后运行的脚本
-run_script=app_base_path/deploy/run.sh
+run_script="$app_base_path/deploy/run.sh"
 
 $ci_base_path/src/index.sh \
 --mode=remote \
