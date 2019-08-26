@@ -25,7 +25,7 @@ run_script="$app_base_path/deploy/run.sh"
 
 # ------------------------------------------------------------
 
-source $app_base_path/deploy/ci-hell/src/libs/index.sh
+source $app_base_path/deploy/ci-shell/src/libs/index.sh
 
 open_ssh_agent
 
