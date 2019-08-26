@@ -20,11 +20,14 @@ function close_ssh_agent(){
 }
 
 function exec_script_remote(){
+
+    echo "[INFO] Start exec remote script"
     local script="$@"
+    echo "$script"
     if [ -r "$script" ] ;then
         ssh -o ConnectTimeout=5 "$remote_user@$remote_ip" 'bash' < "$script"
     elif [ -n "$script" ] ;then
-        ssh -o ConnectTimeout=5 "$remote_user@$remote_ip" "$script"
+        ssh -o ConnectTimeout=5 "$remote_user@$remote_ip" "ssh $script"
     fi
 }
 

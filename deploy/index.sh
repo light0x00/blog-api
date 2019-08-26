@@ -32,7 +32,7 @@ open_ssh_agent
 
 deploy_to_remote
 
-exec_script_remote 'bash /home/light/run-scripts/blog-api.sh'
+exec_script_remote $run_script
 
 close_ssh_agent
 
