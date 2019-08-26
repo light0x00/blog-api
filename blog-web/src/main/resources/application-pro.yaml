@@ -7,7 +7,7 @@ spring:
     password: ${MYSQL_BLOG_PWD}
 
 app:
-  url: http://blog-api.light0x00.com
+  url: blog.light0x00.com
   context-path: ${server.servlet.context-path}
   cookie:
     domain: light0x00.com
