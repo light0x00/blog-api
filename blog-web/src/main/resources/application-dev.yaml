@@ -6,10 +6,8 @@ spring:
     username: root
     password: ${MYSQL_BLOG_PWD}
 
-#test: @MYSQL_BLOG_PWD@
-
 app:
-  url: http://gc-dev.light0x00.com:8082
+  url: http://gc-dev.light0x00.com:8081
   context-path: ${server.servlet.context-path}
   upload-path: /Users/light/gc-shop/
   cookie:
@@ -19,6 +17,6 @@ app:
     token-key: token
   allow-origins:
     - http://blog-dev.light0x00.com:4092
-    - http://blog-dev.light0x00.com:8082
+    - ${app.url}
 
 
