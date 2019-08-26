@@ -4,7 +4,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/blog?useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
     username: blog
-    password: 1234
+    password: ${MYSQL_BLOG_PWD}
 
 app:
   url: http://blog-api.light0x00.com
