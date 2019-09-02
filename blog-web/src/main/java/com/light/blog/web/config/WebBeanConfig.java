@@ -31,24 +31,24 @@ import javax.sql.DataSource;
 @ComponentScan(basePackageClasses = CoreBeanConfig.class, basePackages = {"com.light.blog.web"})
 public class WebBeanConfig {
 
-//    private ApiInfo apiInfo() {
-//        return new ApiInfoBuilder()
-//                .title("my blog api")
-//                .description("")
-//                .contact(new Contact("light", "blog.light0x00.com", "light0x00@gmail.com"))
-//                .version("1.0")
-//                .build();
-//    }
-//
-//    @Bean
-//    public Docket swaggerSpringMvcPlugin() {
-//        return new Docket(DocumentationType.SWAGGER_2)
-//                .useDefaultResponseMessages(false)
-//                .apiInfo(apiInfo())
-//                .select()
-//                .paths(Predicates.not(PathSelectors.regex("/error.*")))
-//                .build();
-//    }
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title("my blog api")
+                .description("")
+                .contact(new Contact("light", "blog.light0x00.com", "light0x00@gmail.com"))
+                .version("1.0")
+                .build();
+    }
+
+    @Bean
+    public Docket swaggerSpringMvcPlugin() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .useDefaultResponseMessages(false)
+                .apiInfo(apiInfo())
+                .select()
+                .paths(Predicates.not(PathSelectors.regex("/error.*")))
+                .build();
+    }
 
     /*
         mybatisplus 分页插件

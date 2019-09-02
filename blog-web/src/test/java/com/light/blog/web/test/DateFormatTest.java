@@ -1,6 +1,7 @@
 package com.light.blog.web.test;
 
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -24,4 +25,5 @@ public class DateFormatTest {
         System.out.println(dt);
         System.out.println(dt2);
     }
+
 }
