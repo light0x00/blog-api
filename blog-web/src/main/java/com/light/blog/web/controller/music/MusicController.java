@@ -5,6 +5,7 @@ import com.light.blog.common.utils.http.MapWrapper;
 import com.light.blog.common.utils.http.RestTemplateWrapper;
 import com.light.blog.common.vo.OutputModel;
 import com.light.blog.web.config.toolkit.GuestApi;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +26,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/music")
 @GuestApi
+@Slf4j
 public class MusicController {
 
     Map<String,String> params = new HashMap<>();
@@ -35,13 +37,14 @@ public class MusicController {
     }
 
     @GetMapping("/list")
-    public OutputModel<List<MusicVo>> get(){
+    public OutputModel<List<MusicVo>> list(){
 
         String r = RestTemplateWrapper.post("https://music.163.com/weapi/playlist/detail",params,String.class).getBody();
+        log.debug(r);
         MapWrapper mw = MapWrapper.wrap(JSON.parseObject(r));
         List<Map> rawSongList = mw.getJsonAsList("result.tracks",Map.class);
-
         List<MusicVo> songList = new LinkedList<>();
+
         for (Map song : rawSongList) {
             MapWrapper songWrapper = MapWrapper.wrap(song);
             String id = songWrapper.getString("id");

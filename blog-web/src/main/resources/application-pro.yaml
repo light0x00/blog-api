@@ -15,5 +15,6 @@ app:
     max-age: 1800
     token-key: token
   allow-origins:
-    - blog.light0x00.com
+    - https://blog.light0x00.com
+    - http://blog.light0x00.com
 
