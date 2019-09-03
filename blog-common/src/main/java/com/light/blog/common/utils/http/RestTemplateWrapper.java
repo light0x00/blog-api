@@ -57,6 +57,14 @@ public class RestTemplateWrapper {
     }
 
 
+    public static <T> ResponseEntity<T> post(String url, Class<T> responseClass) {
+        return exchange(url, HttpMethod.POST, null, null, null, null, responseClass);
+    }
+
+    public static <T> ResponseEntity<T> post(String url, String body, MultiValueMap<String, String> headers, Class<T> responseClass) {
+        return exchange(url, HttpMethod.POST, null, headers, null, body, responseClass);
+    }
+
     public static <T> ResponseEntity<T> post(String url, String body, Class<T> responseClass) {
         return exchange(url, HttpMethod.POST, null, null, null, body, responseClass);
     }

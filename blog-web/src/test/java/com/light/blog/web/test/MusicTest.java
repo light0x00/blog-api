@@ -1,28 +1,14 @@
 package com.light.blog.web.test;
 
 import com.alibaba.fastjson.JSON;
-import com.light.blog.common.utils.JsonUtils;
+import com.light.blog.common.utils.ShellUtils;
 import com.light.blog.common.utils.http.MapWrapper;
 import com.light.blog.common.utils.http.RestTemplateWrapper;
-import com.light.blog.web.BlogApplication;
-import com.light.blog.web.controller.msg.MsgCommentController;
-import com.sun.javafx.collections.MappingChange;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.http.HttpHeaders;
+import org.springframework.util.MultiValueMap;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,5 +36,25 @@ public class MusicTest {
         }
 
     }
+
+
+    @Test
+    public void q2(){
+        String url = "https://music.163.com/weapi/playlist/detail?params=iKXhS10Rb8HR01D%2Bs0iEV8DtuK1WRCCGIygrHcn3s%2F%2FnKKsmYS31zNHCikCC%2F6d%2FjVDkaSTkcODDT6L2NuV8G3ZZBVQWIpjrA8GPxyDoZNihB7FWPaj%2BLfCJh97WTsPZzBQ1GNdORoYhXYKsJMLkV1QZ55hS9pMSWzjzPSKlyFc76G%2BUdZhgro9%2BX89IAH6o&encSecKey=644cf0d6da398d675f3cb0d1349b271e37871a1e40315adcb11783da01b55643349b705712bc636c3f3dfcf64f1fdbae9a2ff5c96a0802239cb35f441cddf830787637d33927a0ea0b73c4e337fcf741528e04a6816853961d92c17b0222724172bd3c5b451c9bf43f991fd93c61e403d85867ec63b81cfbc55d26815eeac9ba";
+        HttpHeaders map = new HttpHeaders();
+        map.put("Content-Type", Arrays.asList("text/plain"));
+        String r = RestTemplateWrapper.post(url,null,map,String.class).getBody();
+        System.out.println(r);
+    }
+
+    @Test
+    public void q3(){
+        String url = "https://music.163.com/weapi/playlist/detail?params=iKXhS10Rb8HR01D%2Bs0iEV8DtuK1WRCCGIygrHcn3s%2F%2FnKKsmYS31zNHCikCC%2F6d%2FjVDkaSTkcODDT6L2NuV8G3ZZBVQWIpjrA8GPxyDoZNihB7FWPaj%2BLfCJh97WTsPZzBQ1GNdORoYhXYKsJMLkV1QZ55hS9pMSWzjzPSKlyFc76G%2BUdZhgro9%2BX89IAH6o&encSecKey=644cf0d6da398d675f3cb0d1349b271e37871a1e40315adcb11783da01b55643349b705712bc636c3f3dfcf64f1fdbae9a2ff5c96a0802239cb35f441cddf830787637d33927a0ea0b73c4e337fcf741528e04a6816853961d92c17b0222724172bd3c5b451c9bf43f991fd93c61e403d85867ec63b81cfbc55d26815eeac9ba";
+        ShellUtils.CommandResult r = ShellUtils.execCommand("curl -X POST \""+url+"\"",false);
+        System.out.println(r.result);
+        System.out.println(r.successMsg);
+    }
+
+
 
 }
