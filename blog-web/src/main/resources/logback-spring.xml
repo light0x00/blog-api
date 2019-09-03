@@ -20,7 +20,7 @@
     <logger name="org.springframework.jdbc.datasource.DataSourceTransactionManager" level="debug"/>
 
 
-    <logger name="com.light.gc.shop" level="debug" additivity="false">
+    <logger name="com.light" level="debug" additivity="false">
         <appender-ref ref="console_color"/>
     </logger>
 
