@@ -18,5 +18,5 @@ app:
     - https://blog.light0x00.com
     - http://blog.light0x00.com
   log:
-    path: /home/user/app/blog-api/logs
+    path: /home/light/app/blog-api/logs
 
