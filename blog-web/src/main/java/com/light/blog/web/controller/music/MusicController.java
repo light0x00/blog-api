@@ -38,7 +38,6 @@ public class MusicController {
     public OutputModel<List<MusicVo>> list() {
 
         String r = getRawData();
-        log.debug(r);
         MapWrapper mw = MapWrapper.wrap(JSON.parseObject(r));
         List<Map> rawSongList = mw.getJsonAsList("result.tracks", Map.class);
         List<MusicVo> songList = new LinkedList<>();

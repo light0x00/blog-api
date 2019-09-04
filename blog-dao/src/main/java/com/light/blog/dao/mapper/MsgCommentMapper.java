@@ -27,6 +27,9 @@ public interface MsgCommentMapper extends MyBaseMapper<MsgComment> {
     @Select("select count(1) from msg_comment where article_key=#{articleKey} and ref_id=-1")
     long countRoot(QueryMsgCommentVo in);
 
+    @Select("select count(1) from msg_comment where article_key=#{articleKey}")
+    long countByArticle(String articleKey);
+
     List<MsgComment> queryReplies(QueryRepliesVo in);
 
     @Select("select count(1) from msg_comment where root_id=#{rootId}")

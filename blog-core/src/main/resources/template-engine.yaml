@@ -1,0 +1,11 @@
+app:
+  template:
+    cache: true
+    encoding: utf-8
+    i18nPrefix: template/i18n/lang
+    patterns:
+       - "*.html"
+       - "*.xml"
+       - "*.txt"
+    prefix: templates/
+    suffix:

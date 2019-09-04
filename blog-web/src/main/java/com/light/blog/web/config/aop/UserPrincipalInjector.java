@@ -2,9 +2,7 @@ package com.light.blog.web.config.aop;
 
 import com.light.blog.web.config.AppConfig;
 import com.light.blog.web.config.CookieConfig;
-import com.light.blog.core.utils.UserEncryptionUtils;
-import com.light.blog.core.utils.UserPrincipalContext;
-import com.light.blog.dao.entities.UserVo;
+import com.light.blog.core.utils.PrincipalContext;
 import com.light.blog.web.utils.CookieUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,21 +41,7 @@ public class UserPrincipalInjector extends HandlerInterceptorAdapter {
             return true;
         }
 
-        String token = cookieUtils.read(cookieConfig.getTokenKey());
-        if (token != null) {
-            UserVo u = UserEncryptionUtils.decode(token);
-            if (u != null) {
-                log.debug("注入用户信息{}", u);
-                UserPrincipalContext.set(u);
-                cookieUtils.write(cookieConfig.getTokenKey(),token);  //刷新cookie失效
-            } else {
-                log.debug("cookie中找到了用户token,但是解析失败");
-                UserPrincipalContext.set(null);
-            }
-        } else {
-            UserPrincipalContext.set(null);
-            log.debug("cookie中没有找到用户token");
-        }
+        PrincipalContext.setLocale(request.getLocale());
 
         return true;
     }

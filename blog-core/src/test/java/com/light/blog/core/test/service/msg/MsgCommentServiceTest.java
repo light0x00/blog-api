@@ -1,4 +1,4 @@
-package com.light.blog.core.test.service;
+package com.light.blog.core.test.service.msg;
 
 import com.light.blog.common.utils.JsonUtils;
 import com.light.blog.common.vo.PageInfo;

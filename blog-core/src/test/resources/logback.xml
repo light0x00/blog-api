@@ -1,0 +1,32 @@
+<Configuration xmls="http://ch.qos.logback/xml/ns/logback">
+
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="CONSOLE_COLOR" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--boldMagenta\cyan\highlight-->
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %highlight(%msg%n)</pattern>
+        </encoder>
+    </appender>
+
+    <!--<logger name="springfox.documentation.swagger.web.ClassOrApiAnnotationResourceGrouping" level="warn"/>-->
+    <!--<logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="debug"/>-->
+    <!--<logger name="org.springframework.jdbc.core.JdbcTemplate" level="debug"/>-->
+    <!--<logger name="org.springframework.jdbc.datasource.DataSourceTransactionManager" level="debug"/>-->
+    <!--<logger name="org.thymeleaf.engine.TemplateManager" level="debug"/>-->
+
+
+    <logger name="com.light.blog" level="debug" additivity="false">
+        <appender-ref ref="CONSOLE_COLOR"/>
+    </logger>
+
+    <root level="info">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+
+</Configuration>

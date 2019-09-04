@@ -17,4 +17,6 @@ app:
   allow-origins:
     - https://blog.light0x00.com
     - http://blog.light0x00.com
+  log:
+    path: /home/user/app/blog-api/logs
 

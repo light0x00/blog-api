@@ -1,4 +1,6 @@
 spring:
+#  config:
+#    location: "classpath:/application.yml,classpath:/template-engine.yaml,classpath:/email.properties"
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/blog?allowPublicKeyRetrieval=true&useSSL=false&useUnicode=true&characterEncoding=UTF-8
@@ -12,4 +14,4 @@ mybatis-plus:
   field-strategy: 0
 
 
-
+app.url: https://blog.light0x00.com

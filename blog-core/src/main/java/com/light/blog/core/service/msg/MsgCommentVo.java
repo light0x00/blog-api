@@ -60,4 +60,11 @@ public class MsgCommentVo implements Serializable {
     private List<MsgCommentVo> replies;
 
     private PageInfo repliesPageInfo;
+
+    //用于在通知「被回复者 」时,让其可以定位此回复.
+    private String replyURL;
+
+    //文章评论总数
+    private Long articleCommentTotal;
+
 }

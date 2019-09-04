@@ -33,6 +33,11 @@ public class MsgCommentController extends BaseController<MsgCommentService> {
         return service.queryRoot(in);
     }
 
+    @GetMapping("/countByArticle")
+    public OutputModel<Long> query(String articleKey){
+        return service.countByArticle(articleKey);
+    }
+
     @PostMapping("/queryReplies")
     public PagingOutputModel<MsgCommentVo> queryReplies(@RequestBody QueryRepliesVo in){
         return service.queryReplies(in);

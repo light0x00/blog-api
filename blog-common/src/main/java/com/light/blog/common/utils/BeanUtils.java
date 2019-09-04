@@ -31,6 +31,22 @@ public class BeanUtils {
         return beanMapper.map(source, destinationClass);
     }
 
+    /**
+     * 将source拷贝到target, 如有同名属性,source将覆盖target
+     * @param source
+     * @param target
+     * @param <T>
+     * @return
+     */
+    public static <T> T copyTo(Object source, T target) {
+        if (source == null) {
+            return null;
+        }
+        beanMapper.map(source,target);
+        return target;
+    }
+
+
     public static <T> T copyAs(Object source, Class<T> destinationClass,Function<T,T> whenReturn) {
         T r = copyAs(source,destinationClass);
         return whenReturn.apply(r);

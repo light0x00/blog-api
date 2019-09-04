@@ -13,7 +13,6 @@ import java.util.List;
  * 不需要分页的list 应当使用 Output<List<T>>
  * </p>
  */
-@Data
 public class PagingOutputModel<T> extends OutputModel<List<T>> {
 
     private PageInfo pageInfo;
@@ -41,4 +40,11 @@ public class PagingOutputModel<T> extends OutputModel<List<T>> {
         return new PagingOutputModel<>(page.getRecords(), new PageInfo(page.getCurrent(), page.getSize(), page.getTotal()));
     }
 
+    public PageInfo getPageInfo() {
+        return pageInfo;
+    }
+
+    public void setPageInfo(PageInfo pageInfo) {
+        this.pageInfo = pageInfo;
+    }
 }

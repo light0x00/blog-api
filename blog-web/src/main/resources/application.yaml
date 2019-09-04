@@ -30,3 +30,11 @@ mybatis-plus:
   mapperLocations: classpath*:mapper/*.xml
 
 
+app:
+    email:
+      host: smtp.mxhichina.com
+      port: 25
+      username: blog@light0x00.com
+      nickname: Light0x00的博客
+      password: ${EMAIL_PWD}
+      encoding: utf-8

@@ -40,7 +40,6 @@
             <artifactId>springfox-swagger-ui</artifactId>
         </dependency>
 
-
     </dependencies>
 
     <build>

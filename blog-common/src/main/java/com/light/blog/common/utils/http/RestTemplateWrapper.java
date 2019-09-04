@@ -5,14 +5,13 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -28,9 +27,7 @@ public class RestTemplateWrapper {
 
     static {
         restTemplate = new RestTemplate();
-        restTemplate.setMessageConverters(
-                Arrays.asList(new StringHttpMessageConverter(Charset.forName("utf-8")))
-        );
+        restTemplate.setMessageConverters(Collections.singletonList(new StringHttpMessageConverter(Charset.forName("utf-8"))));
     }
 
 
@@ -97,9 +94,9 @@ public class RestTemplateWrapper {
             requestHeaders.putAll(headers);
         if (cookie != null)
             requestHeaders.put("Cookie", cookie);
-        requestHeaders.put("Content-Type", Arrays.asList("application/x-www-form-urlencoded"));
+        requestHeaders.put("Content-Type", Collections.singletonList("application/x-www-form-urlencoded"));
 
-        HttpEntity<String> requestEntity = new HttpEntity<String>(body, requestHeaders);
+        HttpEntity<String> requestEntity = new HttpEntity<>(body, requestHeaders);
 
         ResponseEntity<T> response;
         if (params != null)

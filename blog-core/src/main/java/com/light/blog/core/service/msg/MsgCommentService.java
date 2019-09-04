@@ -11,6 +11,8 @@ import com.light.blog.common.vo.PageInfo;
 import com.light.blog.common.vo.PagingOutputModel;
 import com.light.blog.dao.vo.QueryRepliesVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -33,6 +35,12 @@ public class MsgCommentService {
     @Autowired
     MsgCommentMapper mcMapper;
 
+    @Autowired
+    ApplicationEventPublisher publisher;
+
+    @Value("${app.url}")
+    String appURL;
+
     /**
      * 添加一条评论。
      * <p>
@@ -40,36 +48,55 @@ public class MsgCommentService {
      * <p>
      * 返回包含ref对象的vo
      *
-     * @param vo
+     * @param commentVo
      * @return
      */
-    public OutputModel<MsgCommentVo> add(MsgCommentVo vo) {
-        //check
-        Assert.isTrue(isNotEmpty(vo.getArticleKey()), "没有指定文章key");
-        Assert.isTrue(isNotEmpty(vo.getContent()), "内容不能为空");
-        Assert.isTrue(isNotEmpty(vo.getNickname()), "昵称不能为空");
-        Assert.isTrue(isNotEmpty(vo.getEmail()), "邮箱不能为空");
-
+    public OutputModel<MsgCommentVo> add(MsgCommentVo commentVo) {
+        //validate
+        Assert.isTrue(isNotEmpty(commentVo.getArticleKey()), "没有指定文章key");
+        Assert.isTrue(isNotEmpty(commentVo.getContent()), "内容不能为空");
+        Assert.isTrue(isNotEmpty(commentVo.getNickname()), "昵称不能为空");
+        Assert.isTrue(isNotEmpty(commentVo.getEmail()), "邮箱不能为空");
         //TODO 检查文章key是否存在
         MsgComment ref = null;
-        //adjust
-        if (lteZeroOrNil(vo.getRefId())) {
-            vo.setRefId(-1L);
-            vo.setRootId(-1L);
+        if (lteZeroOrNil(commentVo.getRefId())) {
+            commentVo.setRefId(-1L);
+            commentVo.setRootId(-1L);
         } else {
-            ref = mcMapper.selectById(vo.getRefId());
-            Assert.notNull(ref, "引用的评论(refId=%s)不存在", vo.getRefId());
-            vo.setRootId(ref.getRootId() == -1 ? ref.getId() : ref.getRootId());
+            ref = mcMapper.selectById(commentVo.getRefId());
+            Assert.notNull(ref, "引用的评论(refId=%s)不存在", commentVo.getRefId());
+            commentVo.setRootId(ref.getRootId() == -1 ? ref.getId() : ref.getRootId());
         }
-        vo.setPostDate(LocalDateTime.now());
-        vo.setIsDeleted(false);
+        commentVo.setPostDate(LocalDateTime.now());
+        commentVo.setIsDeleted(false);
 
-        MsgComment po = BeanUtils.copyAs(vo, MsgComment.class);
+        //persistence
+        MsgComment po = BeanUtils.copyAs(commentVo, MsgComment.class);
         mcMapper.insert(po);
-        vo.setId(po.getId());
-        if (ref != null)
-            vo.setRef(BeanUtils.copyAs(ref, MsgCommentVo.class));
-        return OutputModel.ofSuccess(vo);
+        commentVo.setId(po.getId());
+
+        //是回复
+        if (ref != null) {
+            MsgCommentVo refVo = BeanUtils.copyAs(ref, MsgCommentVo.class);
+            commentVo.setRef(refVo);
+
+            //发布一个回复事件
+            String replyUrl = commentVo.getReplyURL();
+            if (replyUrl == null)
+                replyUrl = appURL;
+            else
+                replyUrl = replyUrl + "?replyId=" + refVo.getId();
+
+            CommentReplyEvent event = new CommentReplyEvent(this)
+                    .setRefUserEmail(refVo.getEmail())
+                    .setRefUsername(refVo.getNickname())
+                    .setReplyContent(commentVo.getContent())
+                    .setUsername(commentVo.getNickname())
+                    .setReplyUrl(replyUrl);
+            publisher.publishEvent(event);
+        }
+
+        return OutputModel.ofSuccess(commentVo);
     }
 
 
@@ -106,6 +133,11 @@ public class MsgCommentService {
         return PagingOutputModel.ofSuccess(vos, new PageInfo(in.getIndex(), in.getSize(), total));
     }
 
+    public OutputModel<Long> countByArticle(String articleKey){
+        //查文章总评论数
+        long articleTotal = mcMapper.countByArticle(articleKey);
+        return OutputModel.ofSuccess(articleTotal);
+    }
 
     public PagingOutputModel<MsgCommentVo> queryReplies(QueryRepliesVo in) {
         Assert.isTrue(CheckUtils.gtZero(in.getRootId()), "没有指定rootId");
@@ -125,11 +157,12 @@ public class MsgCommentService {
         return PagingOutputModel.ofSuccess(vos, in.newPageInfo(total));
     }
 
-    /** ----------------------------------------------------- 内部工具 ----------------------------------------------------- **/
 
-    /**
-     * 递归找出评论引用. 内置缓存机制,一个RefDeterminer实例对应一次评论的query
-     */
+    /******************************************************************************************************************
+     递归找出评论引用. 内置缓存机制,一个RefDeterminer实例对应一次评论的query。
+     不可作为共享状态使用,因为1.非线程安全 2.无缓存淘汰机制
+     ******************************************************************************************************************/
+
     class RefDeterminer {
 
         Map<Long, MsgCommentVo> cachePool;
@@ -167,7 +200,7 @@ public class MsgCommentService {
          * @param depth      当前递归深度
          * @param depthLimit 正数表示不限制递归层级
          */
-        public void fuck(MsgCommentVo mcVo, int depth, int depthLimit) {
+        private void fuck(MsgCommentVo mcVo, int depth, int depthLimit) {
             if (depthLimit > 0 && depth > depthLimit) {
                 return;
             }

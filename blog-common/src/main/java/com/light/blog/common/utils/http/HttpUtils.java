@@ -22,7 +22,7 @@ public class HttpUtils {
         return toFormData(params);
     }
 
-    public static String toFormData(Map params) {
+    public static String toFormData(Map<String,String> params) {
         StringBuffer sb = new StringBuffer();
         params.forEach(
                 (k, v) -> {

@@ -1,0 +1,19 @@
+<div xmlns:th="http://www.w3.org/1999/xhtml">
+    <h1><img style="vertical-align: middle" src="https://blog.light0x00.com/favicon.ico" /> 橘猫网</h1>
+    <div style="border-bottom:1px solid #F2F6FC">
+        <p>
+            <strong>[(${responder})]</strong>刚刚回复了你的评论
+        </p>
+    </div>
+    <div style="padding-left:20px">
+        <p>
+                <strong th:text="${responder}"></strong>:  [(${replyContent})]
+        </p>
+        <a style="text-decoration: none;" th:href="${replyUrl}">回复</a>
+    </div>
+    <div>
+        <p style="color:#909399;font-size:12px">
+            如果您不想再接收与评论回复相关的电子邮件,可以<a style="text-decoration: none;" href="">退订</a>(暂时未实现..)
+        </p>
+    </div>
+</div>

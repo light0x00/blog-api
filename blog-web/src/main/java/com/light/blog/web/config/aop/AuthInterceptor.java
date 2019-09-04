@@ -3,8 +3,7 @@ package com.light.blog.web.config.aop;
 import com.light.blog.common.vo.OutputModel;
 import com.light.blog.common.vo.ResponseStatus;
 import com.light.blog.web.config.toolkit.WebUtils;
-import com.light.blog.core.domain.UserDomain;
-import com.light.blog.core.utils.UserPrincipalContext;
+import com.light.blog.core.utils.PrincipalContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -30,9 +29,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 
 
 
-    @Autowired
-    UserDomain userDomain;
-
 
     @Autowired
     AppConfig appConfig;
@@ -47,8 +43,6 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         log.trace(request.getRequestURI() + "=>" + handler.getClass());
-
-//        Thread.sleep(1000); //!for test
 
         //1. 静态资源
         if (handler instanceof ResourceHttpRequestHandler) {
@@ -71,23 +65,12 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
                 return true;
             }
 
-            //2.3 访问adminApi却不是管理员
-            if (webUtils.isAdminApi(hm) && !userDomain.isAdministrator()) {
-                webUtils.writeJson(response, OutputModel.ofWarn(ResponseStatus.NoAccess));
-                return false;
-            }
-
-            //2.4 访问guest直接放行
+            //2.3 访问guest直接放行
             if (webUtils.isGuestPage(hm)) {
                 log.trace("guestPage放行");
                 return true;
             }
 
-            //2.5 访问普通api 检查是否登陆
-            if (!UserPrincipalContext.isLogin()) {
-                webUtils.writeJson(response, OutputModel.ofWarn(ResponseStatus.NotLogin));
-                return false;
-            }
             return true;
 
         }
