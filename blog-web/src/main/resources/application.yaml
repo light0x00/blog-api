@@ -9,6 +9,8 @@ server:
       uri-encoding: UTF-8
 
 spring:
+  application:
+    name: blog-api
   mvc:
     favicon:
       enabled: true

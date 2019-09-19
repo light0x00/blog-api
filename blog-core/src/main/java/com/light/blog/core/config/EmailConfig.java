@@ -29,4 +29,9 @@ public class EmailConfig {
 
     //邮件消息队列大小
     int queueSize;
+
+    //连接server端超时时限
+    int timeout=5000;
+    //连接目标用户server超时时限
+    int connectionTimeout=5000;
 }

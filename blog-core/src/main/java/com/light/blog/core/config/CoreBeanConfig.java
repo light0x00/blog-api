@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+import java.util.Properties;
 import java.util.concurrent.*;
 
 /**
@@ -39,6 +40,11 @@ public class CoreBeanConfig {
         sender.setUsername(emailConfig.getUsername());
         sender.setPassword(emailConfig.getPassword());
         sender.setDefaultEncoding(emailConfig.getEncoding());
+
+        Properties rawConfig = new Properties();
+        rawConfig.put("mail.smtp.timeout",emailConfig.getTimeout());
+        rawConfig.put("mail.smtp.connectiontimeout",emailConfig.getConnectionTimeout());
+        sender.setJavaMailProperties(rawConfig);
         return sender;
     }
 

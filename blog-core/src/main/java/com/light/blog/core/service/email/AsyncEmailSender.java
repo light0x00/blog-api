@@ -22,7 +22,7 @@ public class AsyncEmailSender {
     public Future<Boolean> send(EmailVo emailVo) {
        return  executor.submit(() -> {
            try {
-               emailSender.send(emailVo); //勤劳的工人一刻不停的等待着
+               emailSender.send(emailVo);
                return true;
            } catch (Throwable th) {
                log.error("发送邮件时发生异常", th);

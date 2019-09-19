@@ -37,8 +37,9 @@ public class TemplateEmailProducerTest {
         ctx.setVariable("replyUrl", "https://blog.light0x00.com/");
         ctx.setVariable("responder", "Test Responder");
 
+        templateEmailSender.sendHTML("light0x01@ff.com", "Test", "email/reply.html", ctx);
+//        Thread.sleep(1000);
         templateEmailSender.sendHTML("light0x00@163.com", "Test", "email/reply.html", ctx);
-        Thread.sleep(1000);
         templateEmailSender.sendHTML("light0x00@163.com", "Test", "email/reply.html", ctx);
         Thread.sleep(20000);
 
