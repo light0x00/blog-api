@@ -1,11 +1,9 @@
 package com.light.blog.core.service.msg;
 
 import com.light.blog.common.utils.BeanUtils;
-import com.light.blog.core.service.email.TemplateEmailSender;
+import com.light.blog.core.service.email.AsyncTemplateEmailSender;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import org.thymeleaf.TemplateEngine;
 
 import java.util.Map;
 import java.util.concurrent.Future;
@@ -22,11 +20,7 @@ import java.util.concurrent.Future;
 public class MsgEmailNotifier {
 
     @Autowired
-    @Qualifier("nonWebTemplateEngine")
-    TemplateEngine templateEngine;
-
-    @Autowired
-    TemplateEmailSender emailSender;
+    AsyncTemplateEmailSender emailSender;
 
     public Future<Boolean> sendReplyEmail(String to, ReplyTemplateModel model) {
         String subject = "有人回复了你的评论";

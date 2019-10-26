@@ -22,15 +22,6 @@ public class Assert {
         }
     }
 
-
-    public static void notNull(Object obj, ExpMsg expMsg) {
-        isTrue(obj != null, expMsg.getValue());
-    }
-
-    public static void notNull(Object obj, ExpMsg expMsg, Object... replacePatterns) {
-        isTrue(obj != null, expMsg.getValue(replacePatterns));
-    }
-
     public static void isTrue(boolean condition, String msg, Object... replacePatterns) {
         if (!condition) {
             throw new BusinessException(msg, replacePatterns);

@@ -1,7 +1,6 @@
 package com.light.blog.core.test.service.email;
 
-import com.light.blog.core.service.email.TemplateEmailSender;
-import com.light.blog.core.service.email.mq.TemplateEmailProducer;
+import com.light.blog.core.service.email.AsyncTemplateEmailSender;
 import com.light.blog.core.test.CoreTestApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +26,7 @@ import java.util.Locale;
 public class TemplateEmailProducerTest {
 
     @Autowired
-    TemplateEmailSender templateEmailSender;
+    AsyncTemplateEmailSender templateEmailSender;
 
     @Test
     public void t() throws InterruptedException {

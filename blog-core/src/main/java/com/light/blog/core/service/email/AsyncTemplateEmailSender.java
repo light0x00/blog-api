@@ -21,7 +21,7 @@ import java.util.concurrent.Future;
  */
 @Component
 @Slf4j
-public class TemplateEmailSender {
+public class AsyncTemplateEmailSender {
 
     @Autowired
     @Qualifier("nonWebTemplateEngine")
