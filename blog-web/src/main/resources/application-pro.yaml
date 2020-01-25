@@ -1,10 +1,9 @@
-# 热重启开关
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/blog?useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
-    username: blog
-    password: ${MYSQL_BLOG_PWD}
+    url: jdbc:mysql://mysqlserver:3306/blog?useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+    username: ${DB_USER}
+    password: ${DB_PWD}
 
 app:
   url: blog.light0x00.com
@@ -18,5 +17,5 @@ app:
     - https://blog.light0x00.com
     - http://blog.light0x00.com
   log:
-    path: /home/light/app/blog-api/logs
+    path: /app/logs
 

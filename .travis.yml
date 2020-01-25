@@ -1,9 +1,4 @@
-dist: trusty
-os: linux
-language: java
-jdk:
-- oraclejdk8
-
+if: commit_message !~ /(no-deploy|wip)/
 env:
   global:
   - secure: "dYzpOePhI4LyS0v5RxT7tU5oP+Uxre34IqspfmJL7Gp/YRlk4Ww6ZuM6iBf5WaBbiryyyjgmyeDUF2kqCiylesmChano+B9rG74PmND04EGFJpS2ugObl3ydvdS/zSeOwRGCdm0/NCOE7ykznf52z6MIhs/bEZvdtTR6K/KDzYkKGkJT6lwilX+KDmOL5zBFxZ8sYhnmQUzKvwzgJRCxLKcJgt5jTDEoBORXcZoAfMY2n+5Nb5zM19IwabsLehsNEtXUsVuQDzm1c9LWPXCF4Zmm3ltS/Hj8LuvAtZAJ2nQIkcLU7+AcQSfb9IPHlJZvQHYQRvRI/iJG6M6ozypjNEDuseIKADlEREGpYGjlKpmV2ePXwU8lP8dtobVgEJ3l46FMQBsWbwzK/RQB8rLAoN9AwHi99sMGNpWO4BbiC1/VyAGxIfDrhFMlUW2xN9xwhHz/rCCHQ52t1Mm9BCd30znA+/6TjJAR+E0G9PB+kH+zXHetcN6vUmRm5u4V71LMEhLosavOsDkiYF4s/BCl2PEtZsvAQ/GruC+bIPQjPExunhKoPoNCxLJv0e+nKZvhKHb+NaeLptoyCa5JnjoUrI6HVYAv2dySbiFzXK4+IYhlrFPP4Bv/G+uzggl8L51U0Mhy9rOrkSCTmCFpy2dke0ObZpg4FMEqkaWT7rQYgHc="
@@ -11,22 +6,24 @@ env:
 
 addons:
   ssh_known_hosts:
-  - 47.244.152.125
-
-git:
-  submodules: false
+  - light0x00.com
 
 before_install:
-  - git submodule update --init --recursive --remote
   - openssl enc -aes-256-cbc -in deploy/id_rsa_light.enc -out id_rsa_light -K $aes_key -iv $aes_iv -d
   - chmod u=r,og-rwx id_rsa_light
+  - eval "$(ssh-agent -s)"
 
-install: mvn clean install -U -P pro -V -Dmaven.javadoc.skip=true -DskipTests=true --quiet
+install: docker build -t blog-api .
 
 deploy:
   provider: script
   skip_cleanup: true
-  script: bash deploy/index.sh
+  script:
+    - docker save -o /tmp/blog-api.tar blog-api
+    - scp /tmp/blog-api.tar light@light0x00.com:/tmp/blog-api.tar
+    - ssh light@light0x00.com
+    - docker load -i /tmp/blog-api.tar
+    - docker run --name blog-api --link mysql-server:mysqlserver -p 8081:8080 --rm -it --env DB_PWD=$MYSQL_BLOG_PWD --env DB_USER=blog --env EMAIL_PWD=$EMAIL_PWD blog-api
   on:
     branch: master
 

@@ -6,7 +6,7 @@
     <property name="log_size" value="50MB"/>
 
     <springProperty name="app_name" source="spring.application.name"  defaultValue="unknown_app"/>
-    <springProperty name="log_path" source="app.log.path"  defaultValue="/Users/light/Desktop/tmp/"/>
+    <springProperty name="log_path" source="app.log.path" />
     <springProperty name="rolling_size" source="app.log.rolling-size"  defaultValue="10MB"/>
 
 

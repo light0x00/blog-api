@@ -7,6 +7,7 @@ import com.light.blog.core.utils.PrincipalContext;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -45,7 +46,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         log.trace(request.getRequestURI() + "=>" + handler.getClass());
 
         //1. 静态资源
-        if (handler instanceof ResourceHttpRequestHandler) {
+        if (handler instanceof HttpRequestHandler) {
             log.trace("静态资源放行");
             return true;
         }
@@ -78,7 +79,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         else {
             log.error("未处理的 请求 Handler 类型" + handler.getClass());
         }
-        return true;
+        return false;
     }
 
 

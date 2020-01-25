@@ -58,7 +58,6 @@ public class MusicController {
     public String getRawData() {
         String url = "https://music.163.com/weapi/playlist/detail?params=iKXhS10Rb8HR01D%2Bs0iEV8DtuK1WRCCGIygrHcn3s%2F%2FnKKsmYS31zNHCikCC%2F6d%2FjVDkaSTkcODDT6L2NuV8G3ZZBVQWIpjrA8GPxyDoZNihB7FWPaj%2BLfCJh97WTsPZzBQ1GNdORoYhXYKsJMLkV1QZ55hS9pMSWzjzPSKlyFc76G%2BUdZhgro9%2BX89IAH6o&encSecKey=644cf0d6da398d675f3cb0d1349b271e37871a1e40315adcb11783da01b55643349b705712bc636c3f3dfcf64f1fdbae9a2ff5c96a0802239cb35f441cddf830787637d33927a0ea0b73c4e337fcf741528e04a6816853961d92c17b0222724172bd3c5b451c9bf43f991fd93c61e403d85867ec63b81cfbc55d26815eeac9ba";
         ShellUtils.CommandResult r = ShellUtils.execCommand("curl -X POST \"" + url + "\"", false);
-        log.debug("result:", r.result);
         return r.successMsg;
     }
 
