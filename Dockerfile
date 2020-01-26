@@ -1,7 +1,7 @@
 FROM maven:3.6-jdk-8-alpine AS builder
-WORKDIR /app
 COPY . /app
-RUN mvn clean install -U -P pro -V -Dmaven.javadoc.skip=true -DskipTests=true --settings .mvn/settings.xml
+WORKDIR /app
+RUN mvn clean install -U -P pro -V -Dmaven.javadoc.skip=true -DskipTests=true
 
 FROM openjdk:8-jre-alpine
 COPY --from=builder /app/blog-web/target/blog-api.jar /
