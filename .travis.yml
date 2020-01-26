@@ -1,5 +1,7 @@
 if: commit_message !~ /(no-deploy|wip)/
 language: java
+jdk:
+  - openjdk8
 services:
   - docker
 env:
@@ -13,6 +15,7 @@ before_install:
   - openssl enc -aes-256-cbc -in deploy/id_rsa_light.enc -out id_rsa_light -K $aes_key -iv $aes_iv -d
   - chmod u=r,og-rwx id_rsa_light
   - eval "$(ssh-agent -s)"
+  - ssh-add id_rsa_light
 install: docker build -t blog-api .
 deploy:
   provider: script
