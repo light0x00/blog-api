@@ -23,9 +23,10 @@ deploy:
   script:
     - docker save -o /tmp/blog-api.tar blog-api
     - scp /tmp/blog-api.tar light@light0x00.com:/tmp/blog-api.tar
-    - ssh light@light0x00.com
-    - docker load -i /tmp/blog-api.tar
-    - docker run --name blog-api --link mysql-server:mysqlserver -p 8081:8080 --rm -it --env DB_PWD=$MYSQL_BLOG_PWD --env DB_USER=blog --env EMAIL_PWD=$EMAIL_PWD blog-api
+    - ssh light@light0x00.com 'docker load -i /tmp/blog-api.tar'
+    - ssh light@light0x00.com 'docker stop blog-api'
+    - ssh light@light0x00.com 'docker run --name blog-api --link mysql-server:mysqlserver -p 8081:8080 --rm -it --env "DB_PWD=$MYSQL_BLOG_PWD" --env DB_USER=blog --env "EMAIL_PWD=$EMAIL_PWD" blog-api'
+
   on:
     branch: master
 notifications:
