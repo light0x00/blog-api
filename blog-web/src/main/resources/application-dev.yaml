@@ -1,14 +1,13 @@
 # 热重启开关
 spring:
-  port: 8081
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/blog?useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://light0x00.com:3306/blog?useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
     username: ${DB_USER}
     password: ${DB_PWD}
 
 app:
-  url: http://gc-dev.light0x00.com:8081
+  url: http://gc-dev.light0x00.com:${server.port}
   context-path: ${server.servlet.context-path}
   cookie:
     domain: light0x00.com
@@ -17,7 +16,7 @@ app:
     token-key: token
   allow-origins:
     - http://blog-dev.light0x00.com:4092
-    - ${app.url}
-
+  log:
+    path: ${LOG_PATH}
 
 

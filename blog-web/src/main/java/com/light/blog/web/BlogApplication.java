@@ -17,10 +17,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableTransactionManagement(proxyTargetClass = true) //使用cglib,避免jdk proxy导致只能注入接口类型bean
 public class BlogApplication {
 
-
-
     public static void main(String[] args) {
         ConfigurableApplicationContext ctx = SpringApplication.run(BlogApplication.class, args);
-
     }
 }

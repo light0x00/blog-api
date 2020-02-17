@@ -1,7 +1,6 @@
 <Configuration xmls="http://ch.qos.logback/xml/ns/logback">
 
     <!--日志文件存在哪里-->
-    <property name="log_path" value="/Users/light/Desktop/tmp"/>
     <!--多大以后回滚-->
     <property name="log_size" value="50MB"/>
 
@@ -38,27 +37,25 @@
         </triggeringPolicy>
     </appender>
 
-
-
-    <!--<logger name="springfox.documentation.swagger.web.ClassOrApiAnnotationResourceGrouping" level="warn"/>-->
-    <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="debug"/>
-    <!--<logger name="org.springframework.jdbc.core.JdbcTemplate" level="debug"/>-->
-    <!--<logger name="org.springframework.jdbc.datasource.DataSourceTransactionManager" level="debug"/>-->
-
     <springProfile name="dev">
         <logger name="com.light" level="debug" additivity="false">
             <appender-ref ref="CONSOLE_COLOR"/>
         </logger>
     </springProfile>
-
     <springProfile name="pro">
         <root level="warn">
             <appender-ref ref="FILE"/>
         </root>
     </springProfile>
-
     <root level="info">
         <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
     </root>
+
+    <!-- ****************** DEBUG ****************** -->
+    <!--<logger name="springfox.documentation.swagger.web.ClassOrApiAnnotationResourceGrouping" level="warn"/>-->
+    <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="debug"/>
+    <!--<logger name="org.springframework.jdbc.core.JdbcTemplate" level="debug"/>-->
+    <!--<logger name="org.springframework.jdbc.datasource.DataSourceTransactionManager" level="debug"/>-->
 
 </Configuration>

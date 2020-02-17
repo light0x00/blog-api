@@ -17,5 +17,5 @@ app:
     - https://blog.light0x00.com
     - http://blog.light0x00.com
   log:
-    path: /app/logs
+    path: ${LOG_PATH}
 

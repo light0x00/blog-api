@@ -8,5 +8,7 @@ COPY --from=builder /app/blog-web/target/blog-api.jar /
 ENV DB_PWD=
 ENV DB_USER=blog
 ENV EMAIL_PWD=
+ENV LOG_PATH=/app/logs
+VOLUME /app/logs
 EXPOSE 8080
 CMD ["java","-Xmx128m","-jar","blog-api.jar"]
