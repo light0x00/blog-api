@@ -4,6 +4,8 @@ spring:
     url: jdbc:mysql://mysqlserver:3306/blog?useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
     username: ${DB_USER}
     password: ${DB_PWD}
+    hikari:
+      maximum-pool-size: 5
 
 app:
   url: blog.light0x00.com
