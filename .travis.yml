@@ -1,37 +1,37 @@
-if: commit_message !~ /(no-deploy|wip)/
-language: java
-jdk:
-  - openjdk8
-services:
-  - docker
-env:
-  global:
-  - secure: "dYzpOePhI4LyS0v5RxT7tU5oP+Uxre34IqspfmJL7Gp/YRlk4Ww6ZuM6iBf5WaBbiryyyjgmyeDUF2kqCiylesmChano+B9rG74PmND04EGFJpS2ugObl3ydvdS/zSeOwRGCdm0/NCOE7ykznf52z6MIhs/bEZvdtTR6K/KDzYkKGkJT6lwilX+KDmOL5zBFxZ8sYhnmQUzKvwzgJRCxLKcJgt5jTDEoBORXcZoAfMY2n+5Nb5zM19IwabsLehsNEtXUsVuQDzm1c9LWPXCF4Zmm3ltS/Hj8LuvAtZAJ2nQIkcLU7+AcQSfb9IPHlJZvQHYQRvRI/iJG6M6ozypjNEDuseIKADlEREGpYGjlKpmV2ePXwU8lP8dtobVgEJ3l46FMQBsWbwzK/RQB8rLAoN9AwHi99sMGNpWO4BbiC1/VyAGxIfDrhFMlUW2xN9xwhHz/rCCHQ52t1Mm9BCd30znA+/6TjJAR+E0G9PB+kH+zXHetcN6vUmRm5u4V71LMEhLosavOsDkiYF4s/BCl2PEtZsvAQ/GruC+bIPQjPExunhKoPoNCxLJv0e+nKZvhKHb+NaeLptoyCa5JnjoUrI6HVYAv2dySbiFzXK4+IYhlrFPP4Bv/G+uzggl8L51U0Mhy9rOrkSCTmCFpy2dke0ObZpg4FMEqkaWT7rQYgHc="
-  - secure: "lPPtljfrN8uZvblkumrDe/KpDCgwAFO37BkWkVeIV3aOfZ9xCj5lFEhTe12/mCxNxtx7w7/hurJi19YivM3Z/wy0EDzAIcBpT25nGxTNAJvhGLm0kmWbBURTehYatJkGeIKSeMk6NWb178PH3hhrklx4l76b7WyZU+QRsIKbtJK8zCBvt5O2U7Dzf2jUsVPcxL0VwvnHBWMCW+o4TkYgYjadmGavxGkNVide/tDIRikunZn8HkuUl9O4FFv0JlC8T+D+hf5za0cNvmTagABmyXCZ2WT4P8dwEW4DpIW+W2Zou5puuvxTCUiCgeiQL+FJKMv3N2znlJYFmDO5imzDy51dGi0tdkrHhfMYa7OwKaJmmlLZ0jFYwNGVCcI/zaVa+qa6wGkVkmMUY4FdopskVK7zW6CPlcS3NEHAkGvlqtyuVW55WCUPPRLkwyCaGmpcXh4ZazP4Ym4tcA/9enfGZ/jzJ32nScpN/FOt6HcZNv0k2NYFd0lj6ZcT/qt0No0mBg08+NxjTrzVwAQOYrDwIWHHvPz09VVebI8pqyr35M4/V4uDw7nXjpkgkE+xnz1xxMBoJwQVDo/Tu9NL7cQm+tkL3iRnUsmjAMNCb802hv5cei3RyEIDIWAhij5BOZ0pa4Zafrx68bTJclBhtNzrY0r+qW0vt6MM9RE1CTMkDcA="
-addons:
-  ssh_known_hosts:
-  - light0x00.com
-before_install:
-  - openssl enc -aes-256-cbc -in deploy/id_rsa_light.enc -out id_rsa_light -K $aes_key -iv $aes_iv -d
-  - chmod u=r,og-rwx id_rsa_light
-  - eval "$(ssh-agent -s)"
-  - ssh-add id_rsa_light
-install: docker build -t blog-api .
-deploy:
-  provider: script
-  skip_cleanup: true
-  script:
-    - docker save -o /tmp/blog-api.tar blog-api
-    - scp /tmp/blog-api.tar light@light0x00.com:/tmp/blog-api.tar
-    - ssh light@light0x00.com 'docker load -i /tmp/blog-api.tar'
-    - ssh light@light0x00.com 'docker stop blog-api'
-    - ssh light@light0x00.com 'docker run --name blog-api --link mysql-server:mysqlserver -p 8081:8080 --rm -it --env "DB_PWD=$MYSQL_BLOG_PWD" --env DB_USER=blog --env "EMAIL_PWD=$EMAIL_PWD" blog-api'
-
-  on:
-    branch: master
-notifications:
-  email:
-    recipients:
-      - light0x00@163.com
-    on_success: change
-    on_failure: always
+#if: commit_message !~ /(no-deploy|wip)/
+#language: java
+#jdk:
+#  - openjdk8
+#services:
+#  - docker
+#env:
+#  global:
+#  - secure: "dYzpOePhI4LyS0v5RxT7tU5oP+Uxre34IqspfmJL7Gp/YRlk4Ww6ZuM6iBf5WaBbiryyyjgmyeDUF2kqCiylesmChano+B9rG74PmND04EGFJpS2ugObl3ydvdS/zSeOwRGCdm0/NCOE7ykznf52z6MIhs/bEZvdtTR6K/KDzYkKGkJT6lwilX+KDmOL5zBFxZ8sYhnmQUzKvwzgJRCxLKcJgt5jTDEoBORXcZoAfMY2n+5Nb5zM19IwabsLehsNEtXUsVuQDzm1c9LWPXCF4Zmm3ltS/Hj8LuvAtZAJ2nQIkcLU7+AcQSfb9IPHlJZvQHYQRvRI/iJG6M6ozypjNEDuseIKADlEREGpYGjlKpmV2ePXwU8lP8dtobVgEJ3l46FMQBsWbwzK/RQB8rLAoN9AwHi99sMGNpWO4BbiC1/VyAGxIfDrhFMlUW2xN9xwhHz/rCCHQ52t1Mm9BCd30znA+/6TjJAR+E0G9PB+kH+zXHetcN6vUmRm5u4V71LMEhLosavOsDkiYF4s/BCl2PEtZsvAQ/GruC+bIPQjPExunhKoPoNCxLJv0e+nKZvhKHb+NaeLptoyCa5JnjoUrI6HVYAv2dySbiFzXK4+IYhlrFPP4Bv/G+uzggl8L51U0Mhy9rOrkSCTmCFpy2dke0ObZpg4FMEqkaWT7rQYgHc="
+#  - secure: "lPPtljfrN8uZvblkumrDe/KpDCgwAFO37BkWkVeIV3aOfZ9xCj5lFEhTe12/mCxNxtx7w7/hurJi19YivM3Z/wy0EDzAIcBpT25nGxTNAJvhGLm0kmWbBURTehYatJkGeIKSeMk6NWb178PH3hhrklx4l76b7WyZU+QRsIKbtJK8zCBvt5O2U7Dzf2jUsVPcxL0VwvnHBWMCW+o4TkYgYjadmGavxGkNVide/tDIRikunZn8HkuUl9O4FFv0JlC8T+D+hf5za0cNvmTagABmyXCZ2WT4P8dwEW4DpIW+W2Zou5puuvxTCUiCgeiQL+FJKMv3N2znlJYFmDO5imzDy51dGi0tdkrHhfMYa7OwKaJmmlLZ0jFYwNGVCcI/zaVa+qa6wGkVkmMUY4FdopskVK7zW6CPlcS3NEHAkGvlqtyuVW55WCUPPRLkwyCaGmpcXh4ZazP4Ym4tcA/9enfGZ/jzJ32nScpN/FOt6HcZNv0k2NYFd0lj6ZcT/qt0No0mBg08+NxjTrzVwAQOYrDwIWHHvPz09VVebI8pqyr35M4/V4uDw7nXjpkgkE+xnz1xxMBoJwQVDo/Tu9NL7cQm+tkL3iRnUsmjAMNCb802hv5cei3RyEIDIWAhij5BOZ0pa4Zafrx68bTJclBhtNzrY0r+qW0vt6MM9RE1CTMkDcA="
+#addons:
+#  ssh_known_hosts:
+#  - light0x00.com
+#before_install:
+#  - openssl enc -aes-256-cbc -in deploy/id_rsa_light.enc -out id_rsa_light -K $aes_key -iv $aes_iv -d
+#  - chmod u=r,og-rwx id_rsa_light
+#  - eval "$(ssh-agent -s)"
+#  - ssh-add id_rsa_light
+#install: docker build -t blog-api .
+#deploy:
+#  provider: script
+#  skip_cleanup: true
+#  script:
+#    - docker save -o /tmp/blog-api.tar blog-api
+#    - scp /tmp/blog-api.tar light@light0x00.com:/tmp/blog-api.tar
+#    - ssh light@light0x00.com 'docker load -i /tmp/blog-api.tar'
+#    - ssh light@light0x00.com 'docker stop blog-api'
+#    - ssh light@light0x00.com 'docker run --name blog-api --link mysql-server:mysqlserver -p 8081:8080 --rm -it --env "DB_PWD=$MYSQL_BLOG_PWD" --env DB_USER=blog --env "EMAIL_PWD=$EMAIL_PWD" blog-api'
+#
+#  on:
+#    branch: master
+#notifications:
+#  email:
+#    recipients:
+#      - light0x00@163.com
+#    on_success: change
+#    on_failure: always

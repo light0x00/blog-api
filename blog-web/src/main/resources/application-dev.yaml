@@ -7,7 +7,7 @@ spring:
     password: ${DB_PWD}
 
 app:
-  url: http://gc-dev.light0x00.com:${server.port}
+  url: http://blog-dev.light0x00.com:${server.port}
   context-path: ${server.servlet.context-path}
   cookie:
     domain: light0x00.com

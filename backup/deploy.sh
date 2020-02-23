@@ -25,6 +25,8 @@ docker run
 
 # 3. run
 docker run --name blog-api \
+-d \
+--env TZ=Asia/Shanghai \
 --link mysql-server:mysqlserver \
 -p 9010:8080 \
 --rm -it \

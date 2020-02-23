@@ -1,0 +1,1 @@
+ssh light@light0x00.com bash /home/light/softwares/setup-blog-api.sh
