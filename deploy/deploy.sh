@@ -20,8 +20,7 @@ fi;
 # 2. build
 cd $appName
 docker build . -t blog-api
-docker stop blog-api
-docker run
+docker stop blog-api || true
 
 # 3. run
 docker run --name blog-api \
